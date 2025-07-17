@@ -1,18 +1,19 @@
 const materias = [
-  { nombre: "Biología Celular y Molecular", semestre: 1, requisitos: [] },
-  { nombre: "Química General", semestre: 1, requisitos: [] },
-  { nombre: "Anatomía Humana I", semestre: 1, requisitos: [] },
-  { nombre: "Histología y Embriología", semestre: 1, requisitos: [] },
-  { nombre: "Inglés I", semestre: 1, requisitos: [] },
-  { nombre: "Informática Médica", semestre: 1, requisitos: [] },
+  const materias = [
+      { nombre: "Biología Celular y Molecular", semestre: 1, requisitos: [] },
+      { nombre: "Química General", semestre: 1, requisitos: [] },
+      { nombre: "Anatomía Humana I", semestre: 1, requisitos: [] },
+      { nombre: "Histología y Embriología", semestre: 1, requisitos: [] },
+      { nombre: "Inglés I", semestre: 1, requisitos: [] },
+      { nombre: "Informática Médica", semestre: 1, requisitos: [] },
 
-  { nombre: "Anatomía Humana II", semestre: 2, requisitos: ["Anatomía Humana I"] },
-  { nombre: "Química Orgánica", semestre: 2, requisitos: ["Química General"] },
-  { nombre: "Bioquímica", semestre: 2, requisitos: ["Química Orgánica"] },
-  { nombre: "Fisiología Humana I", semestre: 2, requisitos: ["Biología Celular y Molecular"] },
-  { nombre: "Inglés II", semestre: 2, requisitos: ["Inglés I"] },
+      { nombre: "Anatomía Humana II", semestre: 2, requisitos: ["Anatomía Humana I"] },
+      { nombre: "Química Orgánica", semestre: 2, requisitos: ["Química General"] },
+      { nombre: "Bioquímica", semestre: 2, requisitos: ["Química Orgánica"] },
+      { nombre: "Fisiología Humana I", semestre: 2, requisitos: ["Biología Celular y Molecular"] },
+      { nombre: "Inglés II", semestre: 2, requisitos: ["Inglés I"] },
 
-  { nombre: "Fisiología Humana II", semestre: 3, requisitos: ["Fisiología Humana I"] },
+      { nombre: "Fisiología Humana II", semestre: 3, requisitos: ["Fisiología Humana I"] },
       { nombre: "Parasitología Médica", semestre: 3, requisitos: [] },
       { nombre: "Microbiología Médica I", semestre: 3, requisitos: [] },
       { nombre: "Patología General", semestre: 3, requisitos: ["Histología y Embriología"] },
@@ -59,57 +60,60 @@ const materias = [
       { nombre: "Internado II", semestre: 12, requisitos: ["Internado I"] }
     ];
 
-const estadoMaterias = {};
+    const estadoMaterias = {};
 
-function crearMalla() {
-  const malla = document.getElementById("malla");
-  for (let semestre = 1; semestre <= 12; semestre++) {
-    const divSemestre = document.createElement("div");
-    divSemestre.className = "semestre";
+    function crearMalla() {
+      const malla = document.getElementById("malla");
+      for (let semestre = 1; semestre <= 12; semestre++) {
+        const divSemestre = document.createElement("div");
+        divSemestre.className = "semestre";
 
-    const titulo = document.createElement("h2");
-    titulo.textContent = `Semestre ${semestre}`;
-    divSemestre.appendChild(titulo);
+        const titulo = document.createElement("h2");
+        titulo.textContent = `Semestre ${semestre}`;
+        divSemestre.appendChild(titulo);
 
-    materias.filter(m => m.semestre === semestre).forEach(materia => {
-      const divMateria = document.createElement("div");
-      divMateria.className = "materia";
-      divMateria.textContent = materia.nombre;
+        materias.filter(m => m.semestre === semestre).forEach(materia => {
+          const divMateria = document.createElement("div");
+          divMateria.className = "materia";
+          divMateria.textContent = materia.nombre;
 
-      if (materia.requisitos.length > 0) {
-        divMateria.classList.add("bloqueada");
-      }
+          if (materia.requisitos.length > 0) {
+            divMateria.classList.add("bloqueada");
+          }
 
-      divMateria.onclick = () => {
-        if (divMateria.classList.contains("bloqueada")) return;
-        divMateria.classList.toggle("aprobada");
-        estadoMaterias[materia.nombre] = divMateria.classList.contains("aprobada");
-        actualizarDesbloqueo();
-      };
+          divMateria.onclick = () => {
+            if (divMateria.classList.contains("bloqueada")) return;
+            divMateria.classList.toggle("aprobada");
+            estadoMaterias[materia.nombre] = divMateria.classList.contains("aprobada");
+            actualizarDesbloqueo();
+          };
 
-      divMateria.setAttribute("data-nombre", materia.nombre);
-      divSemestre.appendChild(divMateria);
-    });
+          divMateria.setAttribute("data-nombre", materia.nombre);
+          divSemestre.appendChild(divMateria);
+        });
 
-    malla.appendChild(divSemestre);
-  }
-}
-
-function actualizarDesbloqueo() {
-  materias.forEach(m => {
-    const elemento = document.querySelector(`[data-nombre="${m.nombre}"]`);
-    if (!elemento) return;
-
-    const aprobados = m.requisitos.every(req => estadoMaterias[req]);
-
-    if (m.requisitos.length === 0 || aprobados) {
-      elemento.classList.remove("bloqueada");
-    } else {
-      if (!elemento.classList.contains("aprobada")) {
-        elemento.classList.add("bloqueada");
+        malla.appendChild(divSemestre);
       }
     }
-  });
-}
 
-crearMalla();
+    function actualizarDesbloqueo() {
+      materias.forEach(m => {
+        const elemento = document.querySelector(`[data-nombre="${m.nombre}"]`);
+        if (!elemento) return;
+
+        const aprobados = m.requisitos.every(req => estadoMaterias[req]);
+
+        if (m.requisitos.length === 0 || aprobados) {
+          elemento.classList.remove("bloqueada");
+        } else {
+          if (!elemento.classList.contains("aprobada")) {
+            elemento.classList.add("bloqueada");
+          }
+        }
+      });
+    }
+
+    crearMalla();
+  </script>
+</body>
+</html>
