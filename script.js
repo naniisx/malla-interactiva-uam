@@ -1,5 +1,5 @@
-const materias = [
-  const materias = [
+<script>
+    const materias = [
       { nombre: "Biología Celular y Molecular", semestre: 1, requisitos: [] },
       { nombre: "Química General", semestre: 1, requisitos: [] },
       { nombre: "Anatomía Humana I", semestre: 1, requisitos: [] },
@@ -115,5 +115,3 @@ const materias = [
 
     crearMalla();
   </script>
-</body>
-</html>
