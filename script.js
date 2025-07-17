@@ -4,10 +4,13 @@ const semestres = [
   {
     nombre: "Semestre 1",
     materias: [
+      { nombre: "Química General e Inorgánica", codigo: "QUI101" },
       { nombre: "Biología Celular y Molecular", codigo: "BIO101" },
-      { nombre: "Química General", codigo: "QUI101" },
+      { nombre: "Biofísica", codigo: "MD BIF-003" },
       { nombre: "Introducción a la Medicina", codigo: "MED101" },
-      { nombre: "Anatomía I", codigo: "ANA101" },
+      { nombre: "Bioestadística", codigo: "MD EDE 005" },
+      { nombre: "Inlgés I", codigo: "ENGM -005" },
+      { nombre: "Métodos de estudio", codigo: "EDU 007" },
     ],
   },
   {
